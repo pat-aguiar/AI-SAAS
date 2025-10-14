@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ReviewResume() {
+const ReviewResume = () => {
   return (
     <div>
       <h1>ReviewResume</h1>
