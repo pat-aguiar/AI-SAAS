@@ -3,7 +3,7 @@ import { AiToolsData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { useClerk, useUser } from "@clerk/clerk-react";
 
-function AiTools() {
+const AiTools = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const { openSignIn } = useClerk();

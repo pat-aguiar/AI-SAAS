@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 
-function Hero() {
+const Hero = () => {
   const navigate = useNavigate();
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { PricingTable } from "@clerk/clerk-react";
 
-function Plan() {
+const Plan = () => {
   return (
     <div className="max-w-2xl mx-auto z-20 my-30">
       <div className="text-center">
