@@ -18,12 +18,14 @@ export const generateArticle = async (req, res) => {
     const plan = req.plan;
     const free_usage = req.free_usage;
 
+
     if (plan !== "premium" && free_usage >= 10) {
       return res.json({
         success: false,
         message: "Limit reached. Upgrade to continue.",
       });
     }
+
 
     const response = await AI.chat.completions.create({
       model: "gemini-2.0-flash",
@@ -36,6 +38,9 @@ export const generateArticle = async (req, res) => {
       temperature: 0.7,
       max_tokens: length,
     });
+
+    console.log("in SERVER veja bem PATI", prompt, length, typeof length.toString())
+
 
     const content = response.choices[0].message.content;
 

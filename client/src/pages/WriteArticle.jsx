@@ -24,8 +24,10 @@ const WriteArticle = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
+
     try {
       setLoading(true);
+
       const prompt = `Write an article about ${input} in ${selectedLength.text}`;
 
       const { data } = await axios.post(
