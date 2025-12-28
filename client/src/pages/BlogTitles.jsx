@@ -21,6 +21,7 @@ const BlogTitles = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("General");
   const [input, setInput] = useState("");
+  
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState("");
 
@@ -28,7 +29,7 @@ const BlogTitles = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("start", input, selectedCategory)
+
     try {
       setLoading(true);
       
