@@ -1,12 +1,40 @@
-import { Eraser, Sparkles } from 'lucide-react';
-import React, { useState } from 'react'
+import { Eraser, Sparkles } from "lucide-react";
+import React, { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const RemoveBackground = () => {
-
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState("");
+
+  const { getToken } = useAuth();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+      formData.append("image", input);
+
+      const { data } = await axios.post(
+        "/api/ai/remove-image-background",
+        formData,
+        { headers: { Authorization: `Bearer ${await getToken()}` } }
+      );
+
+      if (data.success) {
+        setContent(data.content);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -28,7 +56,9 @@ const RemoveBackground = () => {
           className="w-full p-2 px-3 mt-2 outline-none text-sm rounded-md border border-gray-300 text-gray-600"
           required
         />
-        <p className='text-xs text-gray-500 font-light mt-1'>Supports JPG, PNG, and other image formats</p>
+        <p className="text-xs text-gray-500 font-light mt-1">
+          Supports JPG, PNG, and other image formats
+        </p>
         <button className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#F6AB41] to-[#FF4938] text-white px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer">
           <Eraser className="w-5" />
           Remove background
@@ -49,6 +79,6 @@ const RemoveBackground = () => {
       </div>
     </div>
   );
-}
+};
 
-export default RemoveBackground
+export default RemoveBackground;
