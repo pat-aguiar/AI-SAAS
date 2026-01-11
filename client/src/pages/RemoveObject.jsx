@@ -1,9 +1,18 @@
 import { Scissors, Sparkles } from "lucide-react";
 import React, { useState } from "react";
+import axios from "axios";
+import { useAuth } from "@clerk/clerk-react";
+import toast from "react-hot-toast";
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const RemoveObject = () => {
   const [input, setInput] = useState("");
   const [object, setObject] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState("");
+
+  const { getToken } = useAuth();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
