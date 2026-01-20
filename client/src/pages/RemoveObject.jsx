@@ -16,6 +16,31 @@ const RemoveObject = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    try {
+      setLoading(true);
+
+      if (object.split(" ").length > 1) {
+        return toast("Please enter only one object name");
+      }
+
+      const formData = new FormData();
+      formData.append("image", input);
+
+      const { data } = await axios.post(
+        "/api/ai/remove-image-background",
+        formData,
+        { headers: { Authorization: `Bearer ${await getToken()}` } }
+      );
+
+      if (data.success) {
+        setContent(data.content);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -38,7 +63,9 @@ const RemoveObject = () => {
           required
         />
 
-        <p className="mt-6 text-sm font-medium">Describe object name to remove</p>
+        <p className="mt-6 text-sm font-medium">
+          Describe object name to remove
+        </p>
         <textarea
           onChange={(e) => setObject(e.target.value)}
           value={object}
