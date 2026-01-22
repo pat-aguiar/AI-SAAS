@@ -184,8 +184,8 @@ export const removeImageBackground = async (req, res) => {
 export const removeImageObject = async (req, res) => {
   try {
     const { userId } = req.auth();
-    const { image } = req.file;
     const { object } = req.body;
+    const image = req.file;
     const plan = req.plan;
 
     if (plan !== "premium") {
@@ -198,11 +198,7 @@ export const removeImageObject = async (req, res) => {
     const { public_id } = await cloudinary.uploader.upload(image.path);
 
     const imageUrl = cloudinary.url(public_id, {
-      transformation: [
-        {
-          effect: `gen_remove: ${object}`,
-        },
-      ],
+      transformation: [{effect: `gen_remove: ${object}`}],
       resource_type: "image",
     });
 

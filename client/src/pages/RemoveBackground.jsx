@@ -79,6 +79,9 @@ const RemoveBackground = () => {
           <h1 className="text-xl font-semibold">Processed Image</h1>
         </div>
 
+        {console.log(content)}
+
+
         {!content ? (
           <div className="flex-1 flex justify-center items-center">
             <div className="text-sm flex flex-col items-center gap-5 text-gray-400">

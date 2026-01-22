@@ -1,7 +1,8 @@
-import { FileText, Sparkles } from 'lucide-react';
-import React, { useState } from 'react'
+import { FileText, Sparkles } from "lucide-react";
+import React, { useState } from "react";
+import axios from "axios";
 
-const ReviewResume = () =>  {
+const ReviewResume = () => {
   const [input, setInput] = useState("");
 
   const onSubmitHandler = async (e) => {
@@ -27,7 +28,9 @@ const ReviewResume = () =>  {
           className="w-full p-2 px-3 mt-2 outline-none text-sm rounded-md border border-gray-300 text-gray-600"
           required
         />
-        <p className='text-xs text-gray-500 font-light mt-1'>Supports PDF format only.</p>
+        <p className="text-xs text-gray-500 font-light mt-1">
+          Supports PDF format only.
+        </p>
         <button className="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-[#00DA83] to-[#009BB3] text-white px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer">
           <FileText className="w-5" />
           Review resume
@@ -48,6 +51,6 @@ const ReviewResume = () =>  {
       </div>
     </div>
   );
-}
+};
 
-export default ReviewResume
+export default ReviewResume;
