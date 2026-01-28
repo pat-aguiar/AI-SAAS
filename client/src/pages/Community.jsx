@@ -17,7 +17,7 @@ const Community = () => {
 
   const fetchCreations = async () => {
     try {
-      const { data } = await axios.get("/api/ai/get-published-creations", {
+      const { data } = await axios.get("/api/user/get-published-creations", {
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
 
@@ -35,7 +35,7 @@ const Community = () => {
   const imageLikeToggle = async (id) => {
     try {
       const { data } = await axios.post(
-        "/api/ai/toggle-like-creation",
+        "/api/user/toggle-like-creation",
         { id },
         {
           headers: { Authorization: `Bearer ${await getToken()}` },
