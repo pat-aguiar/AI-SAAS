@@ -37,13 +37,6 @@ export const generateArticle = async (req, res) => {
       max_tokens: length,
     });
 
-    console.log(
-      "in SERVER veja bem PATI",
-      prompt,
-      length,
-      typeof length.toString()
-    );
-
     const content = response.choices[0].message.content;
 
     await sql`INSERT INTO creations (user_id, prompt, content, type) VALUES (${userId}, ${prompt}, ${content}, 'article')`;
@@ -233,7 +226,6 @@ export const resumeReview = async (req, res) => {
 
     const dataBuffer = fs.readFileSync(resume.path);
     const pdfData = await pdf(dataBuffer);
-    console.log(typeof pdfData.text)
 
     const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Resume Content: \n\n ${pdfData.text}`;
 
